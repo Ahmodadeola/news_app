@@ -1,0 +1,145 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	font-style: helvetica verdana wildwest;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: verdana;
+}
+
+header {
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	border: 1px solid grey;
+	padding-bottom: 0;
+	box-shadow: 2px 2px 3px grey;
+}
+
+header > ul {
+	display: flex;
+	margin-bottom: 0;
+	justify-content: space-around;
+	overflow-x: auto;
+	list-style: none;
+	min-width: 100%;
+	padding: 0;
+}
+
+header > ul > li {
+	padding: 10px;
+	padding-bottom: 0;
+}
+
+header > ul > li > a{
+	text-decoration: none;
+	color: #3f2c61;
+}
+header h3 {
+	font: 400 1.4em helvetica verdana segoe;
+	margin-left: 3em;
+}
+
+header > ul::-webkit-scrollbar {
+	display: none;
+}
+
+.active {
+	border-bottom: 2px solid blue;
+}
+
+.menu-bar {
+	position: fixed;
+	border: 1px solid blue;
+	padding: 5px;
+	border-radius: 50%;
+	top: 12px;
+	display: inline;
+}
+
+.menu-bar + * {
+	display: inline;
+}
+
+.menu-bar div {
+	height: 1.75pt;
+	width: .98em;
+	margin: 2px;
+	background-color: black;
+	transition: all ease-in 0.5s;
+}
+
+.menu ul {
+	list-style: none;
+}
+
+.rotate {
+	transform: rotate(-45deg) translate(-4px, 3px);
+	transition: transform ease-in 0.4s;
+}
+
+.rotate-re {
+	transform: rotate(45deg) translate(-4px, -2px);
+	transition: transform ease-in 0.4s;
+}
+
+.fade {
+	opacity: 0;
+}
+
+main {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.main {
+	width: 90%;
+	text-align: center;
+	border-radius: 4px;
+	border: 1px solid grey;
+	height: 10rem;
+	margin-bottom: 15px;
+	box-shadow: 2px 2px 3px grey, -2px -2px 2px grey;
+}
+
+.main img {
+	height: 85%;
+}
+
+section.stories {
+	width: 90%;
+	box-shadow: 2px 2px 3px grey, -2px -2px 2px grey;
+	border-radius: 4px;
+	height: 5em;
+	border: 1px solid grey;
+	margin-bottom: 10px;
+}
+
+section.stories > img {
+	height: 100%;
+	width: 30%;
+	float: left;
+	margin-right: 4px;
+}
+
+.preloader {
+	width: 5em;
+	height: 4em;
+	border: 4px solid grey;
+	margin-top: 40px;
+	border-left: solid blue;
+	border-radius: 50%;
+	animation: rotate linear 2s infinite;
+}
+
+@keyframes rotate {
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
