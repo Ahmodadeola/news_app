@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Droid+Sans|Inconsolata&effect=outline" />
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -15,12 +16,22 @@
 			<div></div>
 		</div>
 		<h3>NewsApp</h3>
-		<div class="menu">
+		<div class="menu hide">
+			<div class="search">
+				<input placeholder="Search" type="text" name="search">
+				<button>Find</button>
+			</div>
 			<ul>
-				<li><a href="#"></a></li>
-				<li><a href="#"></a></li>
-				<li><a href="#"></a></li>
-				<li><a href="#"></a></li>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Latest</a></li>
+			<li><a href="#">Local</a></li>
+			<li><a href="#">Foreign</a></li>
+			<li><a href="#">Sport</a></li>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Latest</a></li>
+			<li><a href="#">Local</a></li>
+			<li><a href="#">Foreign</a></li>
+			<li><a href="#">Sport</a></li>
 			</ul>
 		</div>
 		<ul>
@@ -36,13 +47,13 @@
 		<template class="main">
 			<section class="main">
 				<img src="{{src}}">
-				<p>{{title}}</p>
+				<p><a target="_blank" href="{{link}}">{{title}}</a></p>
 			</section>
 		</template>
 		<template class="stories">
 			<section class="stories">
 				<img src="{{src}}">
-				<p>{{title}}</p>
+				<p><a target="_blank" href="{{link}}">{{title}}</a></p>
 			</section>
 		</template>
 	</main>

@@ -1,17 +1,21 @@
 html, body {
 	width: 100%;
 	height: 100%;
-	font-style: helvetica verdana wildwest;
+	font-family: "Oswald" "Droid Sans";
 }
 
 body {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	color: #03351a;
 	font-family: verdana;
 }
 
 header {
+	position: fixed;
+	top: 0;
+	background-color: white;
 	padding: 5px;
 	width: 100%;
 	margin-bottom: 10px;
@@ -35,9 +39,10 @@ header > ul > li {
 	padding-bottom: 0;
 }
 
-header > ul > li > a{
+header > ul > li > a, .menu a{
 	text-decoration: none;
 	color: #3f2c61;
+	font-family: cursive;
 }
 header h3 {
 	font: 400 1.4em helvetica verdana segoe;
@@ -52,9 +57,15 @@ header > ul::-webkit-scrollbar {
 	border-bottom: 2px solid blue;
 }
 
+.hide {
+	display: none;
+	transition: all ease-in 2s;
+}
+
 .menu-bar {
 	position: fixed;
-	border: 1px solid blue;
+	background-color: white;
+	border: 1px solid #3f2c61;;
 	padding: 5px;
 	border-radius: 50%;
 	top: 12px;
@@ -73,10 +84,49 @@ header > ul::-webkit-scrollbar {
 	transition: all ease-in 0.5s;
 }
 
-.menu ul {
-	list-style: none;
+.menu {
+	position: fixed;
+	top: 3em;
+	left: 0;
+	height: 100%;
+	width: 70%;
+	background-color: rgba(0, 0, 0, 1.0);
+	transition: display ease-in 2s;
 }
 
+.menu ul {
+	list-style: none;
+	padding-left: inherit;
+}
+
+.menu a {
+	padding: 10px;
+}
+.menu li {
+	padding: 10px;
+	border-bottom: 1px solid white;
+	margin-left: 0;
+}
+
+.menu input, .menu button{
+	border: 1px solid transparent;
+	font: 300 .956em "Droid Sans";
+	outline: thin;
+	border-radius: 4px;
+	height: 1.05em;
+	padding: 6px;
+}
+
+.menu button {
+	height: 2em;
+	background-color: #3f2c61;
+
+}
+
+.search {
+	margin-top: .88em;
+	text-align: center;
+}
 .rotate {
 	transform: rotate(-45deg) translate(-4px, 3px);
 	transition: transform ease-in 0.4s;
@@ -93,41 +143,61 @@ header > ul::-webkit-scrollbar {
 
 main {
 	display: flex;
+	margin-top: 6em;
 	flex-wrap: wrap;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-.main {
+section {
 	width: 90%;
-	text-align: center;
-	border-radius: 4px;
-	border: 1px solid grey;
-	height: 10rem;
-	margin-bottom: 15px;
+	font: 350 .93em "Droid Sans";
 	box-shadow: 2px 2px 3px grey, -2px -2px 2px grey;
+	border-radius: 4px;
+	display: flex;
+	border: 1px solid grey;
 }
 
-.main img {
-	height: 85%;
+section a {
+	text-decoration: none;
+	font-family: inherit;
+	color: #3f2c61;
+}
+
+section.main {
+	width: 100%;
+	flex-direction: column;
+	height: 10rem;
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+section.main img {
+	height: 65%;
+}
+
+section.main p {
+
 }
 
 section.stories {
-	width: 90%;
-	box-shadow: 2px 2px 3px grey, -2px -2px 2px grey;
-	border-radius: 4px;
-	height: 5em;
-	border: 1px solid grey;
+	height: 5.5em;
+	align-items: flex-start;
 	margin-bottom: 10px;
 }
 
 section.stories > img {
 	height: 100%;
-	width: 30%;
+	width: 25%;
 	float: left;
 	margin-right: 4px;
 }
+
+section.stories p{
+	font: 350 .93em helvetica;
+}
+
 
 .preloader {
 	width: 5em;

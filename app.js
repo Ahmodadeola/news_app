@@ -57,18 +57,20 @@ let view = {
 
 	render(){
 		let news = alpha.getHomeNews();
+		console.log(news);
 		let mainTemp, storiesTemp;
 		console.log(news);
 
 		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
 		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
-		console.log(news[0].urlToImage);
+		mainTemp = mainTemp.replace(/{{link}}/g, news[0].url);
 
 		this.main.innerHTML = mainTemp;
 
 		for(let i = 1; i < news.length; ++i){
 			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
 			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
+			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
 			this.main.innerHTML += storiesTemp;
 		}
 	}
