@@ -2,7 +2,7 @@ let data = {
 	fetchNews(){
 		let localNews_url = "https://newsapi.org/v2/top-headlines?country=ng&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
 		let latestNews_url = "https://newsapi.org/v2/top-headlines?country=ng&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
-		let foreignNews_url = "https://newsapi.org/v2/top-headlines?apiKey=c30a9d378fb64233a7781e06ff2a78f1";
+		let foreignNews_url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
 		let sportNews_url = "https://newsapi.org/v2/top-headlines?country=ng&category=sport&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
 		
 		fetch(localNews_url)
@@ -36,6 +36,18 @@ let data = {
 		})
 		.then((newsdata) => {
 			this.news.sport = newsdata.articles;
+			view.init();
+		})
+		.catch((err) => {
+			return console.log(err);
+		})
+
+		fetch(foreignNews_url)
+		.then((response) => {
+			return response.json();
+		})
+		.then((newsdata) => {
+			this.news.foreign = newsdata.articles;
 			view.init();
 		})
 		.catch((err) => {
@@ -95,6 +107,7 @@ let view = {
 
 		foreign.addEventListener("click", (e) => {
 			e.preventDefault();
+			this.renderForeign();
 		});
 
 		sport.addEventListener("click", (e) => {
@@ -129,6 +142,25 @@ let view = {
 		console.log(news);
 		let mainTemp, storiesTemp;
 		console.log(news);
+
+		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
+		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
+		mainTemp = mainTemp.replace(/{{link}}/g, news[0].url);
+
+		this.main.innerHTML = mainTemp;
+
+		for(let i = 1; i < news.length; ++i){
+			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
+			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
+			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
+			this.main.innerHTML += storiesTemp;
+		}
+	},
+
+	renderForeign(){
+		let news = alpha.getForeignNews();
+		console.log(news);
+		let mainTemp, storiesTemp;
 
 		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
 		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
