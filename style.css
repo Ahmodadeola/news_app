@@ -1,7 +1,7 @@
 html, body {
 	width: 100%;
 	height: 100%;
-	font-family: "Oswald" "Droid Sans";
+	font-family: "Oswald";
 }
 
 body {
@@ -27,6 +27,7 @@ header {
 header > ul {
 	display: flex;
 	margin-bottom: 0;
+	margin-right: 6em;
 	justify-content: space-around;
 	overflow-x: auto;
 	list-style: none;
@@ -182,9 +183,14 @@ section.main p {
 }
 
 section.stories {
-	height: 5.5em;
+	height: 6em;
 	align-items: flex-start;
 	margin-bottom: 10px;
+	overflow: auto;
+}
+
+section.stories::-webkit-scrollbar {
+	display: hidden;
 }
 
 section.stories > img {

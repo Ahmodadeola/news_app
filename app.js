@@ -1,16 +1,16 @@
 let data = {
 	fetchNews(){
 		let localNews_url = "https://newsapi.org/v2/top-headlines?country=ng&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
-		let latestNews_url = "https://newsapi.org/v2/top-headlines?country=ng&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
 		let foreignNews_url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
 		let sportNews_url = "https://newsapi.org/v2/top-headlines?country=ng&category=sport&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
+		let techNews_url = "https://newsapi.org/v2/top-headlines?country=ng&category=technology&apiKey=c30a9d378fb64233a7781e06ff2a78f1";
 		
 		fetch(localNews_url)
 		.then((response) => {
 			return response.json();
 		})
 		.then((newsdata) => {
-			this.news.home = newsdata.articles;
+			this.news.local = newsdata.articles;
 			console.log(newsdata);
 			view.init();
 		})
@@ -18,12 +18,13 @@ let data = {
 			return console.log(err);
 		})
 
-		fetch(latestNews_url)
+		fetch(techNews_url)
 		.then((response) => {
 			return response.json();
 		})
 		.then((newsdata) => {
-			this.news.latest = newsdata.articles;
+			this.news.tech = newsdata.articles;
+			console.log(newsdata);
 			view.init();
 		})
 		.catch((err) => {
@@ -56,16 +57,19 @@ let data = {
 	},
 
 
-	news: {home: null, latest: null, local: null, foreign: null, sport: null}
+	news: {home: null, local: null, foreign: null, sport: null, tech: null, business: null}
 };
 
 let alpha = {
 	getHomeNews(){
-		return data.news.home; 
-	},
-
-	getLatestNews(){
-		return data.news.latest; 
+		let news =  [data.news.local.splice(0, 7), data.news.sport.splice(0, 7), data.news.foreign.splice(0, 7)] ; 
+		let sortNews = [];
+		for(let item of news){
+			for(let each of item){
+				sortNews.push(each);
+			}
+		}
+		return sortNews;
 	},
 
 	getLocalNews(){
@@ -80,6 +84,11 @@ let alpha = {
 		return data.news.sport; 
 	},
 
+	getTechNews(){
+		console.log(data.news.tech);
+		return data.news.tech; 
+	},
+
 	init(){
 		data.fetchNews();
 	}
@@ -92,13 +101,15 @@ let view = {
 		this.storiesTemp = document.querySelector("template.stories").innerHTML;
 		this.render();
 
-		let latest = document.querySelector("header > ul > li:nth-child(2n)");
-		let local = document.querySelector("header > ul > li:nth-child(3n)");
-		let foreign = document.querySelector("header > ul > li:nth-child(4n)");
-		let sport = document.querySelector("header > ul > li:nth-child(5n)");
+		let local = document.querySelector("header > ul > li:nth-child(2n)");
+		let foreign = document.querySelector("header > ul > li:nth-child(3n)");
+		let sport = document.querySelector("header > ul > li:nth-child(4n)");
+		let tech = document.querySelector("header > ul > li:nth-child(5n)");
+		let business = document.querySelector(".menu li:nth-child(7n)");
 
-		latest.addEventListener("click", (e) => {
+		tech.addEventListener("click", (e) => {
 			e.preventDefault();
+			this.renderTech();
 		});
 
 		local.addEventListener("click", (e) => {
@@ -137,8 +148,8 @@ let view = {
 		}
 	},
 
-	renderLatest(){
-		let news = alpha.getLatestNews();
+	renderTech(){
+		let news = alpha.getTechNews();
 		console.log(news);
 		let mainTemp, storiesTemp;
 		console.log(news);
