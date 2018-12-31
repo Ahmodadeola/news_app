@@ -11,11 +11,10 @@ let data = {
 		})
 		.then((newsdata) => {
 			this.news.local = newsdata.articles;
-			console.log(newsdata);
 			view.init();
 		})
 		.catch((err) => {
-			return console.log(err);
+			console.log(err);
 		})
 
 		fetch(techNews_url)
@@ -28,7 +27,7 @@ let data = {
 			view.init();
 		})
 		.catch((err) => {
-			return console.log(err);
+			console.log(err);
 		})
 
 		fetch(sportNews_url)
@@ -40,7 +39,7 @@ let data = {
 			view.init();
 		})
 		.catch((err) => {
-			return console.log(err);
+			console.log(err);
 		})
 
 		fetch(foreignNews_url)
@@ -52,7 +51,7 @@ let data = {
 			view.init();
 		})
 		.catch((err) => {
-			return console.log(err);
+			console.log(err);
 		})
 	},
 
@@ -62,7 +61,7 @@ let data = {
 
 let alpha = {
 	getHomeNews(){
-		let news =  [data.news.local.splice(0, 7), data.news.sport.splice(0, 7), data.news.foreign.splice(0, 7)] ; 
+		let news =  [data.news.local.slice(0, 7), data.news.foreign.slice(0, 7), data.news.sport.slice(0, 7)]; 
 		let sortNews = [];
 		for(let item of news){
 			for(let each of item){
@@ -85,7 +84,6 @@ let alpha = {
 	},
 
 	getTechNews(){
-		console.log(data.news.tech);
 		return data.news.tech; 
 	},
 
@@ -94,122 +92,16 @@ let alpha = {
 	}
 };
 
-let view = {
-	init(){
-		this.main = document.querySelector("main");
-		this.mainTemp = document.querySelector("template.main").innerHTML;
-		this.storiesTemp = document.querySelector("template.stories").innerHTML;
-		this.render();
-
-		let local = document.querySelector("header > ul > li:nth-child(2n)");
-		let foreign = document.querySelector("header > ul > li:nth-child(3n)");
-		let sport = document.querySelector("header > ul > li:nth-child(4n)");
-		let tech = document.querySelector("header > ul > li:nth-child(5n)");
-		let business = document.querySelector(".menu li:nth-child(7n)");
-
-		tech.addEventListener("click", (e) => {
-			e.preventDefault();
-			this.renderTech();
-		});
-
-		local.addEventListener("click", (e) => {
-			e.preventDefault();
-		});
-
-		foreign.addEventListener("click", (e) => {
-			e.preventDefault();
-			this.renderForeign();
-		});
-
-		sport.addEventListener("click", (e) => {
-			e.preventDefault();
-			console.log(data.news.sport)
-			this.renderSport();
-		});
-	},
+class NewsCat{
+	constructor(source){
+		this.source = source;
+		this.mainTemp = view.mainTemp;
+		this.storiesTemp = view.storiesTemp;
+		this.main = view.main;
+	}
 
 	render(){
-		let news = alpha.getHomeNews();
-		console.log(news);
-		let mainTemp, storiesTemp;
-		console.log(news);
-
-		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
-		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
-		mainTemp = mainTemp.replace(/{{link}}/g, news[0].url);
-
-		this.main.innerHTML = mainTemp;
-
-		for(let i = 1; i < news.length; ++i){
-			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
-			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
-			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
-			this.main.innerHTML += storiesTemp;
-		}
-	},
-
-	renderTech(){
-		let news = alpha.getTechNews();
-		console.log(news);
-		let mainTemp, storiesTemp;
-		console.log(news);
-
-		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
-		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
-		mainTemp = mainTemp.replace(/{{link}}/g, news[0].url);
-
-		this.main.innerHTML = mainTemp;
-
-		for(let i = 1; i < news.length; ++i){
-			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
-			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
-			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
-			this.main.innerHTML += storiesTemp;
-		}
-	},
-
-	renderForeign(){
-		let news = alpha.getForeignNews();
-		console.log(news);
-		let mainTemp, storiesTemp;
-
-		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
-		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
-		mainTemp = mainTemp.replace(/{{link}}/g, news[0].url);
-
-		this.main.innerHTML = mainTemp;
-
-		for(let i = 1; i < news.length; ++i){
-			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
-			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
-			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
-			this.main.innerHTML += storiesTemp;
-		}
-	},
-
-	renderLocal(){
-		let news = alpha.getLocalNews();
-		console.log(news);
-		let mainTemp, storiesTemp;
-		console.log(news);
-
-		mainTemp = this.mainTemp.replace(/{{src}}/g, news[0].urlToImage);
-		mainTemp = mainTemp.replace(/{{title}}/g, news[0].title);
-		mainTemp = mainTemp.replace(/{{link}}/g, news[0].url);
-
-		this.main.innerHTML = mainTemp;
-
-		for(let i = 1; i < news.length; ++i){
-			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
-			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
-			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
-			this.main.innerHTML += storiesTemp;
-		}
-	},
-
-	renderSport(){
-		let news = alpha.getSportNews();
-		console.log(news);
+		let news = this.source();
 		let mainTemp, storiesTemp;
 		console.log(news);
 
@@ -226,5 +118,88 @@ let view = {
 			this.main.innerHTML += storiesTemp;
 		}
 	}
-};
+}
+
+let view = {
+	homeInit(){
+		this.local =document.querySelector("section.local");
+		this.sport = document.querySelector("section.sport");
+		this.foreign = document.querySelector("section.foreign");
+	},
+
+	init(){
+
+		let home = document.querySelector("header > ul > li:first-child");
+		let local = document.querySelector("header > ul > li:nth-child(2n)");
+		let foreign = document.querySelector("header > ul > li:nth-child(3n)");
+		let sport = document.querySelector("header > ul > li:nth-child(4n)");
+		let tech = document.querySelector("header > ul > li:nth-child(5n)");
+		let business = document.querySelector(".menu li:nth-child(7n)");
+
+		this.main = document.querySelector("main");
+		this.homeTemp = document.querySelector("template.home").innerHTML;
+		this.storiesTemp = document.querySelector("template.stories").innerHTML;
+		this.mainTemp = document.querySelector("template.mainTemp").innerHTML;
+		this.render();
+
+		home.addEventListener("click", (e) => {
+			e.preventDefault();
+			this.render();
+		});
+
+		tech.addEventListener("click", (e) => {
+			e.preventDefault();
+			let tech = new NewsCat(alpha.getTechNews);
+			tech.render();
+		});
+
+		local.addEventListener("click", (e) => {
+			e.preventDefault();
+			let local = new NewsCat(alpha.getLocalNews);
+			local.render();
+		});
+
+		foreign.addEventListener("click", (e) => {
+			let foreign = new NewsCat(alpha.getForeignNews);
+			foreign.render();
+		});
+
+		sport.addEventListener("click", (e) => {
+			e.preventDefault();
+			let sport = new NewsCat(alpha.getSportNews);
+			sport.render();
+		});
+	},
+
+	
+	render(){
+		let news = alpha.getHomeNews();
+		let storiesTemp;
+		console.log(news);
+
+		this.main.innerHTML = this.homeTemp;
+		this.homeInit();
+
+		for(let i = 0; i < 7; ++i){
+			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
+			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
+			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
+			this.local.innerHTML += storiesTemp;
+		}
+
+		for(let i = 7; i < 14; ++i){
+			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
+			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
+			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
+			this.foreign.innerHTML += storiesTemp;
+		}
+
+		for(let i = 14; i < 21; ++i){
+			storiesTemp = this.storiesTemp.replace(/{{src}}/g, news[i].urlToImage);
+			storiesTemp = storiesTemp.replace(/{{title}}/g, news[i].title);
+			storiesTemp = storiesTemp.replace(/{{link}}/g, news[i].url);
+			this.sport.innerHTML += storiesTemp;
+		}
+	}	
+}
 alpha.init();
